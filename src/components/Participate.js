@@ -23,7 +23,7 @@ const Participate = () => {
     e.preventDefault();
     
     try {
-      const response = await fetch('http://localhost:3001/api/participants', {
+      const response = await fetch('https://backend-tank.onrender.com/api/participants', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

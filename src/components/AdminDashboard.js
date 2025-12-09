@@ -9,7 +9,7 @@ const AdminDashboard = () => {
   const [participants, setParticipants] = useState([]);
   const [error, setError] = useState('');
 
-  const API_URL = 'http://localhost:3001/api';
+  const API_URL = 'https://backend-tank.onrender.com/api';
 
   const handleLogin = (e) => {
     e.preventDefault();

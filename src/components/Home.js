@@ -10,7 +10,7 @@ const Home = () => {
   const [editingItem, setEditingItem] = useState(null);
   const [stats, setStats] = useState({ total: 0, categories: {} });
 
-  const API_URL = 'http://localhost:3001/api';
+  const API_URL = 'https://backend-tank.onrender.com/api';
   const categories = ['General', 'Work', 'Personal', 'Shopping', 'Health', 'Education'];
   const [clickSmokes, setClickSmokes] = useState([]);
 
