@@ -19,7 +19,7 @@ const Header = () => {
       
       <div className="nav-section">
         <Link to="/" className="participate-btn home-btn">HOME</Link>
-        <Link to="/participate" className="participate-btn">GIVEAWAYCONTEXT</Link>
+        <Link to="/participate" className="participate-btn">GIVEAWAYCONTEST</Link>
         <Link to="/winner-reveal" className="participate-btn winner-btn">WINNER REVEAL</Link>
       </div>
     </header>
