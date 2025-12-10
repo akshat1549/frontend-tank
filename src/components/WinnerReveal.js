@@ -3,13 +3,7 @@ import Header from './Header';
 import './WinnerReveal.css';
 
 const WinnerReveal = () => {
-  const [participants, setParticipants] = useState([
-    { id: 1, game_username: 'GamerPro123', game_id: 'GP123456', youtube_username: 'GamerPro' },
-    { id: 2, game_username: 'TankMaster', game_id: 'TM789012', youtube_username: 'TankMaster' },
-    { id: 3, game_username: 'SniperKing', game_id: 'SK345678', youtube_username: 'SniperKing' },
-    { id: 4, game_username: 'BattleHero', game_id: 'BH901234', youtube_username: 'BattleHero' },
-    { id: 5, game_username: 'WarLord99', game_id: 'WL567890', youtube_username: 'WarLord99' }
-  ]);
+  const [participants, setParticipants] = useState([]);
   const [isSpinning, setIsSpinning] = useState(false);
   const [winner, setWinner] = useState(null);
   const [rotation, setRotation] = useState(0);
@@ -18,13 +12,12 @@ const WinnerReveal = () => {
   const [showPasswordModal, setShowPasswordModal] = useState(false);
 
   useEffect(() => {
-    // Keep sample data, don't fetch from API yet
-    // fetchParticipants();
+    fetchParticipants();
   }, []);
 
   const fetchParticipants = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/participants');
+      const response = await fetch('https://backend-tank.onrender.com/api/participants');
       const data = await response.json();
       if (Array.isArray(data)) {
         setParticipants(data);
