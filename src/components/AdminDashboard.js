@@ -115,7 +115,7 @@ const AdminDashboard = () => {
                   <td>{p.server}</td>
                   <td>{p.game_id}</td>
                   <td>{p.youtube_username}</td>
-                  <td>{new Date(p.created_at).toLocaleDateString()}</td>
+                  <td>{new Date(p.created_date).toLocaleDateString()}</td>
                   <td>
                     <button onClick={() => deleteParticipant(p.id)} className="delete-btn">
                       Delete
