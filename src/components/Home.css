@@ -226,6 +226,11 @@
   padding: 40px 20px;
   margin: 30px auto;
   max-width: 1000px;
+  position: relative;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
 }
 
 .section-title {
@@ -339,10 +344,13 @@
 
 /* Contact Section */
 .contact-section {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4) !important;
   border: 2px solid var(--glass-border);
   border-radius: 20px;
   padding: 40px;
+  position: relative;
+  z-index: 15;
+  backdrop-filter: blur(10px);
 }
 
 .contact-info {
@@ -377,6 +385,10 @@
   padding: 30px 20px;
   margin-top: 50px;
   border-top: 2px solid var(--glass-border);
+  position: relative;
+  z-index: 15;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
 }
 
 .home-footer p {

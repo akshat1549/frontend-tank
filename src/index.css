@@ -96,6 +96,23 @@ body::after {
   100% { background-position: 60px 60px, 105px 105px, 145px 145px; }
 }
 
+/* Reduce animation on mobile to prevent flickering */
+@media (max-width: 768px) {
+  .dots-layer {
+    opacity: 0.5;
+    animation-duration: 12s;
+  }
+  
+  body::before {
+    opacity: 0.7;
+    animation-duration: 5s;
+  }
+  
+  body::after {
+    animation-duration: 6s;
+  }
+}
+
 .orbs-layer {
   position: fixed;
   top: 0;
