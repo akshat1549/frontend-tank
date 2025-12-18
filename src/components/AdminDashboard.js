@@ -9,7 +9,7 @@ const AdminDashboard = () => {
   const [participants, setParticipants] = useState([]);
   const [error, setError] = useState('');
 
-  const API_URL = 'http://localhost:3001/api';
+  const API_URL = 'https://backend-tank.onrender.com/api';
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -115,7 +115,7 @@ const AdminDashboard = () => {
                   <td>{p.server}</td>
                   <td>{p.game_id}</td>
                   <td>{p.youtube_username}</td>
-                  <td>{new Date(p.created_at).toLocaleDateString()}</td>
+                  <td>{new Date(p.created_date).toLocaleDateString()}</td>
                   <td>
                     <button onClick={() => deleteParticipant(p.id)} className="delete-btn">
                       Delete

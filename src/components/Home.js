@@ -10,7 +10,7 @@ const Home = () => {
   const [editingItem, setEditingItem] = useState(null);
   const [stats, setStats] = useState({ total: 0, categories: {} });
 
-  const API_URL = 'http://localhost:3001/api';
+  const API_URL = 'https://backend-tank.onrender.com/api';
   const categories = ['General', 'Work', 'Personal', 'Shopping', 'Health', 'Education'];
   const [clickSmokes, setClickSmokes] = useState([]);
 
@@ -152,7 +152,7 @@ const Home = () => {
       
       <div className="container" style={{marginTop: '100px'}}>
         <header className="header">
-          <h1 className="glitch cyber-text" data-text="TANK GAMING HUB">TANK GAMING HUB</h1>
+          <h1 className="glitch cyber-text" data-text="TANK GAMEING HUB">TANK GAMEING HUB</h1>
           <p>⚡ LEVEL UP YOUR GAMING EXPERIENCE ⚡</p>
         </header>
         <div className="tank-container" onClick={handleTankClick}>

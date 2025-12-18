@@ -226,6 +226,11 @@
   padding: 40px 20px;
   margin: 30px auto;
   max-width: 1000px;
+  position: relative;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
 }
 
 .section-title {
@@ -339,10 +344,13 @@
 
 /* Contact Section */
 .contact-section {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4) !important;
   border: 2px solid var(--glass-border);
   border-radius: 20px;
   padding: 40px;
+  position: relative;
+  z-index: 15;
+  backdrop-filter: blur(10px);
 }
 
 .contact-info {
@@ -377,6 +385,10 @@
   padding: 30px 20px;
   margin-top: 50px;
   border-top: 2px solid var(--glass-border);
+  position: relative;
+  z-index: 15;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
 }
 
 .home-footer p {
@@ -394,6 +406,20 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .tank-container {
+    height: 300px;
+    margin: 20px 0 -10px 0;
+  }
+  
+  .tank-image {
+    max-width: 100%;
+  }
+  
+  .hero-section {
+    padding: 40px 15px;
+    margin: -20px 0 30px 0;
+  }
+  
   .hero-title {
     font-size: 1.8rem;
   }
@@ -402,11 +428,52 @@
     font-size: 1rem;
   }
   
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-btn {
+    width: 80%;
+    max-width: 300px;
+  }
+  
   .section-title {
     font-size: 1.5rem;
   }
   
+  .content-section {
+    padding: 30px 15px;
+  }
+  
   .why-grid {
     grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .contact-section {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tank-container {
+    height: 250px;
+  }
+  
+  .hero-title {
+    font-size: 1.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .section-title {
+    font-size: 1.3rem;
+  }
+  
+  .section-text {
+    font-size: 1rem;
   }
 }

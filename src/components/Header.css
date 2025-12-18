@@ -10,9 +10,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 30px;
+  padding: 0 15px;
   z-index: 1000;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .logo-section {
@@ -61,6 +63,7 @@
   flex: 0 0 auto;
   display: flex;
   gap: 15px;
+  margin-right: 20px;
 }
 
 .participate-btn {
@@ -118,21 +121,58 @@
 
 @media (max-width: 768px) {
   .main-header {
-    padding: 0 15px;
+    padding: 0 10px;
     height: 70px;
+    flex-wrap: wrap;
   }
   
   .channel-logo {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .marquee-section {
+    margin: 0 10px;
+    flex: 1;
+    min-width: 120px;
   }
   
   .marquee-text {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+  }
+  
+  .nav-section {
+    gap: 8px;
+    margin-right: 5px;
   }
   
   .participate-btn {
-    padding: 10px 20px;
-    font-size: 14px;
+    padding: 8px 12px;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-header {
+    height: auto;
+    padding: 10px 5px;
+  }
+  
+  .nav-section {
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 5px;
+  }
+  
+  .participate-btn {
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+  
+  .marquee-text {
+    font-size: 1rem;
   }
 }
