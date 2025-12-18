@@ -152,7 +152,7 @@ const Home = () => {
       
       <div className="container" style={{marginTop: '100px'}}>
         <header className="header">
-          <h1 className="glitch cyber-text" data-text="TANK GAMING HUB">TANK GAMING HUB</h1>
+          <h1 className="glitch cyber-text" data-text="TANK GAME HUB">TANK GAMING HUB</h1>
           <p>⚡ LEVEL UP YOUR GAMING EXPERIENCE ⚡</p>
         </header>
         <div className="tank-container" onClick={handleTankClick}>
