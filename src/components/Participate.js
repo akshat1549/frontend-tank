@@ -108,7 +108,7 @@ const Participate = () => {
           
           <form className="participate-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>Game Username *</label>
+              <label>Game Nickname *</label>
               <input
                 type="text"
                 name="gameUsername"
@@ -156,7 +156,7 @@ const Participate = () => {
             </div>
             
             <div className="form-group">
-              <label>YouTube Username *</label>
+              <label>YouTube Nickname *</label>
               <input
                 type="text"
                 name="youtubeUsername"
