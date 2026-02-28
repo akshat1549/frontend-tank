@@ -74,7 +74,7 @@ const Participate = () => {
           <h1 className="giveaway-title">Locked & Loaded! Exclusive TankForce Giveaway by SatanISLIVE</h1>
           
           <div className="giveaway-description">
-            <h2>Official 500 Subscribers VIP Giveaway</h2>
+            <h2>Official 500 Subscribers GOLD Giveaway</h2>
             <p>Thank you for being part of our growing community! As we celebrate reaching 500 subscribers, we're giving back with an exclusive reward for our supporters.</p>
             
             <div className="prize-section">
@@ -92,15 +92,15 @@ const Participate = () => {
                 <li>Fill in all required details in below accurately.</li>
                 <li>Make sure you are subscribed to the channel.</li>
                 <li>Stay active and support the channel</li>
-                <li>Winners will be selected once we reach 500 subscribers.</li>
+                <li>Winners will be selected on giveaway live stream.</li>
               </ul>
             </div>
             
             <div className="winner-section">
               <h3>🎁 Winner Selection:</h3>
               <ul>
-                <li>🔄 All valid participants will be added to the Spin Wheel.</li>
-                <li>🎯 4 names will be picked live using the wheel.</li>
+                <li>🔄 All valid participants will be added to the chest.</li>
+                <li>🎯 4 names will be picked live using the chest.</li>
                 <li>🔔 Winners will then be contacted and announced officially.</li>
               </ul>
             </div>
