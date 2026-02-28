@@ -61,7 +61,7 @@ const Participate = () => {
       {/* Floating Orbs */}
       <div className="orbs-layer">
         <div className="orb"></div>
-        <div className="orb"></div>
+        <div className="orb"></div> 
         <div className="orb"></div>
       </div>
       
@@ -74,15 +74,15 @@ const Participate = () => {
           <h1 className="giveaway-title">Locked & Loaded! Exclusive TankForce Giveaway by SatanISLIVE</h1>
           
           <div className="giveaway-description">
-            <h2>Official 250 Subscribers VIP Giveaway</h2>
-            <p>Thank you for being part of our growing community! As we work towards our milestone of 250 subscribers, we're giving back with an exclusive reward for our supporters.</p>
+            <h2>Official 500 Subscribers VIP Giveaway</h2>
+            <p>Thank you for being part of our growing community! As we celebrate reaching 500 subscribers, we're giving back with an exclusive reward for our supporters.</p>
             
             <div className="prize-section">
               <h3>📌 Prize:</h3>
               <ul>
-                <li>🏆 VIP 40 Days (30 + 10 Bonus)</li>
-                <li>🎉 3 Lucky Winners</li>
-                <li>🌍 Valid for Singapore Server Only</li>
+                <li>🏆 8k Golds</li>
+                <li>🎉 4 Lucky Winners</li>
+                <li>🌍 Valid for Europe and Singapore Servers (Both)</li>
               </ul>
             </div>
             
@@ -92,7 +92,7 @@ const Participate = () => {
                 <li>Fill in all required details in below accurately.</li>
                 <li>Make sure you are subscribed to the channel.</li>
                 <li>Stay active and support the channel</li>
-                <li>Winners will be selected once we reach 250 subscribers.</li>
+                <li>Winners will be selected once we reach 500 subscribers.</li>
               </ul>
             </div>
             
@@ -100,7 +100,7 @@ const Participate = () => {
               <h3>🎁 Winner Selection:</h3>
               <ul>
                 <li>🔄 All valid participants will be added to the Spin Wheel.</li>
-                <li>🎯 3 names will be picked live using the wheel.</li>
+                <li>🎯 4 names will be picked live using the wheel.</li>
                 <li>🔔 Winners will then be contacted and announced officially.</li>
               </ul>
             </div>
@@ -140,6 +140,7 @@ const Participate = () => {
                 required
               >
                 <option value="Singapore">Singapore</option>
+                <option value="Europe">Europe</option>
               </select>
             </div>
             
