@@ -4,9 +4,9 @@ import './WinnerReveal.css';
 
 const WinnerReveal = () => {
   const [participants, setParticipants] = useState([]);
-  const [isSpinning, setIsSpinning] = useState(false);
-  const [winner, setWinner] = useState(null);
-  const [rotation, setRotation] = useState(0);
+  const [isOpening, setIsOpening] = useState(false);
+  const [winners, setWinners] = useState([]);
+  const [isChestOpen, setIsChestOpen] = useState(false);
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [password, setPassword] = useState('');
   const [showPasswordModal, setShowPasswordModal] = useState(false);
@@ -43,32 +43,39 @@ const WinnerReveal = () => {
     }
   };
 
-  const spinWheel = () => {
+  const openChest = () => {
     if (!isAdminMode) {
-      alert('Only admin can spin the wheel!');
+      alert('Only admin can open the chest!');
       return;
     }
     
-    if (participants.length === 0) {
-      alert('No participants yet!');
+    if (participants.length < 4) {
+      alert('Need at least 4 participants!');
       return;
     }
 
-    setIsSpinning(true);
-    setWinner(null);
+    setIsOpening(true);
+    setWinners([]);
+    setIsChestOpen(false);
 
-    const randomIndex = Math.floor(Math.random() * participants.length);
-    const winnerData = participants[randomIndex];
+    setTimeout(() => setIsChestOpen(true), 1000);
+
+    const selectedWinners = [];
+    const participantsCopy = [...participants];
     
-    const spins = 5 + Math.random() * 5;
-    const finalRotation = rotation + (spins * 360) + (randomIndex * (360 / participants.length));
-    
-    setRotation(finalRotation);
+    for (let i = 0; i < 4; i++) {
+      const randomIndex = Math.floor(Math.random() * participantsCopy.length);
+      selectedWinners.push(participantsCopy[randomIndex]);
+      participantsCopy.splice(randomIndex, 1);
+      
+      setTimeout(() => {
+        setWinners(prev => [...prev, selectedWinners[i]]);
+      }, 2000 + (i * 1000));
+    }
 
     setTimeout(() => {
-      setIsSpinning(false);
-      setWinner(winnerData);
-    }, 3000);
+      setIsOpening(false);
+    }, 6000);
   };
 
   return (
@@ -86,10 +93,10 @@ const WinnerReveal = () => {
       </div>
       
       <div className="winner-container">
-        <h1 className="winner-title">🎯 WINNER REVEAL ZONE 🎯</h1>
+        <h1 className="winner-title">🎁 WINNER REVEAL CHEST 🎁</h1>
         
         <div className="winner-content">
-          <div className="wheel-section">
+          <div className="chest-section">
             {showPasswordModal && (
               <div className="lock-overlay">
                 <div className="lock-modal">
@@ -120,9 +127,9 @@ const WinnerReveal = () => {
               </div>
             )}
             
-            <div className="wheel-container">
+            <div className="chest-container">
               {!isAdminMode && (
-                <div className="wheel-lock-3d" onClick={handleLockClick}>
+                <div className="chest-lock-3d" onClick={handleLockClick}>
                   <div className="lock-body">
                     <div className="lock-shackle"></div>
                     <div className="lock-keyhole"></div>
@@ -130,49 +137,45 @@ const WinnerReveal = () => {
                   <p className="lock-text">Admin Only</p>
                 </div>
               )}
-              <div 
-                className={`spin-wheel ${isSpinning ? 'spinning' : ''}`}
-                style={{ transform: `rotate(${rotation}deg)` }}
-              >
-                {participants.map((participant, index) => (
-                  <div
-                    key={participant.id}
-                    className="wheel-segment"
-                    style={{
-                      transform: `rotate(${index * (360 / participants.length)}deg)`,
-                      '--segment-color': `hsl(${index * (360 / participants.length)}, 80%, 60%)`
-                    }}
-                  >
-                    <span className="segment-text">{participant.game_username}</span>
-                  </div>
-                ))}
+              
+              <div className={`treasure-chest ${isChestOpen ? 'open' : ''} ${isOpening ? 'shaking' : ''}`}>
+                <div className="chest-lid">
+                  <div className="chest-lock">🔒</div>
+                </div>
+                <div className="chest-base"></div>
+                <div className="chest-glow"></div>
               </div>
-              <div className="wheel-pointer">▼</div>
             </div>
             
             {isAdminMode && (
               <button 
-                className="spin-btn" 
-                onClick={spinWheel}
-                disabled={isSpinning || participants.length === 0}
+                className="open-btn" 
+                onClick={openChest}
+                disabled={isOpening || participants.length < 4}
               >
-                {isSpinning ? '🎲 SPINNING...' : '🎲 SPIN WHEEL'}
+                {isOpening ? '🎁 OPENING...' : '🎁 OPEN CHEST'}
               </button>
             )}
             
             {!isAdminMode && (
               <p className="viewer-message">
-                👁️ Viewing Mode - Only admin can spin the wheel
+                👁️ Viewing Mode - Only admin can open the chest
               </p>
             )}
             
-            {winner && (
-              <div className="winner-announcement">
-                <h3>🏆 WINNER 🏆</h3>
-                <div className="winner-details">
-                  <p><strong>Game Username:</strong> {winner.game_username}</p>
-                  <p><strong>Game ID:</strong> {winner.game_id}</p>
-                  <p><strong>YouTube:</strong> {winner.youtube_username}</p>
+            {winners.length > 0 && (
+              <div className="winners-announcement">
+                <h3>🏆 WINNERS 🏆</h3>
+                <div className="winners-grid">
+                  {winners.map((winner, index) => (
+                    <div key={index} className="winner-card" style={{animationDelay: `${index * 0.2}s`}}>
+                      <div className="winner-rank">#{index + 1}</div>
+                      <p><strong>Game:</strong> {winner.game_username}</p>
+                      <p><strong>ID:</strong> {winner.game_id}</p>
+                      <p><strong>YouTube:</strong> {winner.youtube_username}</p>
+                      <p><strong>Server:</strong> {winner.server}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}

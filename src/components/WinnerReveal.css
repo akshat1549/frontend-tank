@@ -85,7 +85,7 @@
   font-size: 0.9rem;
 }
 
-.wheel-section {
+.chest-section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -93,12 +93,13 @@
   padding: 30px;
 }
 
-.wheel-container {
+.chest-container {
   position: relative;
   margin-bottom: 30px;
+  perspective: 1000px;
 }
 
-.wheel-lock-3d {
+.chest-lock-3d {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -181,87 +182,104 @@
   50% { transform: translateY(-10px); }
 }
 
-.spin-wheel {
-  width: 400px;
-  height: 400px;
-  background: 
-    conic-gradient(
-      from 0deg,
-      var(--neon-pink) 0deg,
-      var(--neon-blue) 72deg,
-      var(--neon-green) 144deg,
-      var(--neon-purple) 216deg,
-      var(--neon-orange) 288deg,
-      var(--neon-pink) 360deg
-    );
-  border-radius: 50%;
-  border: 6px solid #000;
+.treasure-chest {
+  width: 300px;
+  height: 250px;
   position: relative;
-  transition: transform 3s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+}
+
+.treasure-chest.shaking {
+  animation: chestShake 0.5s ease-in-out infinite;
+}
+
+.chest-base {
+  width: 300px;
+  height: 150px;
+  background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #8B4513 100%);
+  border: 5px solid #654321;
+  border-radius: 15px;
+  position: absolute;
+  bottom: 0;
   box-shadow: 
-    0 0 0 3px var(--neon-blue),
-    0 0 40px rgba(0, 245, 255, 0.8),
-    inset 0 0 30px rgba(0, 0, 0, 0.5);
-  animation: wheelPulse 2s ease-in-out infinite alternate;
+    0 10px 40px rgba(0, 0, 0, 0.8),
+    inset 0 -10px 20px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(255, 215, 0, 0.3);
 }
 
-.spin-wheel.spinning {
-  animation: spin 3s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.wheel-segment {
+.chest-base::before {
+  content: '';
   position: absolute;
-  width: 50%;
-  height: 50%;
-  transform-origin: 100% 100%;
-  clip-path: polygon(0 0, 100% 0, 100% 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.8);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.segment-text {
-  font-family: 'Orbitron', monospace;
-  font-size: 0.5rem;
-  font-weight: 700;
-  color: #ffffff;
-  text-shadow: 
-    0 0 5px #000000,
-    0 0 10px #000000,
-    2px 2px 2px #000000;
-  white-space: nowrap;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  background: rgba(0, 0, 0, 0.9);
-  padding: 3px 6px;
-  border-radius: 4px;
+.chest-lid {
+  width: 300px;
+  height: 120px;
+  background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #8B4513 100%);
+  border: 5px solid #654321;
+  border-radius: 15px 15px 5px 5px;
   position: absolute;
-  top: 30%;
-  left: 70%;
-  transform: translateX(-50%) rotate(-45deg);
-  max-width: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  top: 0;
+  transform-origin: bottom;
+  transition: transform 1s ease-out;
+  box-shadow: 
+    0 5px 20px rgba(0, 0, 0, 0.6),
+    inset 0 -5px 15px rgba(0, 0, 0, 0.4);
 }
 
-.wheel-pointer {
+.treasure-chest.open .chest-lid {
+  transform: rotateX(-120deg);
+}
+
+.chest-lock {
   position: absolute;
-  top: -30px;
+  bottom: -15px;
   left: 50%;
   transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 40px solid var(--neon-pink);
-  z-index: 10;
-  filter: drop-shadow(0 0 15px var(--neon-pink));
-  animation: pointerBounce 1s ease-in-out infinite alternate;
+  font-size: 2rem;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+  transition: opacity 0.5s;
 }
 
-.spin-btn {
+.treasure-chest.open .chest-lock {
+  opacity: 0;
+}
+
+.chest-glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 1s;
+  pointer-events: none;
+}
+
+.treasure-chest.open .chest-glow {
+  opacity: 1;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes chestShake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-5px) rotate(-2deg); }
+  75% { transform: translateX(5px) rotate(2deg); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+.open-btn {
   padding: 20px 40px;
   background: var(--gaming-gradient);
   border: 3px solid var(--neon-green);
@@ -279,69 +297,90 @@
   margin-bottom: 30px;
 }
 
-.spin-btn:hover:not(:disabled) {
+.open-btn:hover:not(:disabled) {
   transform: translateY(-3px);
   box-shadow: 0 10px 30px rgba(57, 255, 20, 0.6);
 }
 
-.spin-btn:disabled {
+.open-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.winner-announcement {
+.winners-announcement {
   text-align: center;
   background: linear-gradient(135deg, var(--neon-green) 0%, var(--neon-blue) 100%);
   border-radius: var(--border-radius);
-  padding: 25px;
-  box-shadow: 0 0 30px rgba(57, 255, 20, 0.5);
+  padding: 30px;
+  margin-top: 40px;
+  box-shadow: 0 0 40px rgba(57, 255, 20, 0.6);
   animation: winnerGlow 1s ease-in-out infinite alternate;
 }
 
-.winner-announcement h3 {
+.winners-announcement h3 {
   font-family: 'Orbitron', monospace;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: white;
-  margin-bottom: 15px;
-  text-shadow: 0 0 10px rgba(0,0,0,0.5);
+  margin-bottom: 30px;
+  text-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
-.winner-details p {
+.winners-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.winner-card {
+  background: rgba(0, 0, 0, 0.6);
+  border: 3px solid var(--neon-pink);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  position: relative;
+  animation: cardSlideIn 0.6s ease-out forwards;
+  opacity: 0;
+  box-shadow: 0 0 20px rgba(255, 20, 147, 0.4);
+}
+
+.winner-rank {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--neon-orange);
+  color: white;
+  font-family: 'Orbitron', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 5px 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(255, 102, 0, 0.6);
+}
+
+.winner-card p {
   font-family: 'Rajdhani', monospace;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: white;
   margin: 8px 0;
-  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+  text-align: left;
 }
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(1800deg); }
+@keyframes cardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes winnerGlow {
-  0% { box-shadow: 0 0 30px rgba(57, 255, 20, 0.5); }
-  100% { box-shadow: 0 0 50px rgba(57, 255, 20, 0.8); }
-}
-
-@keyframes wheelPulse {
-  0% { 
-    box-shadow: 
-      0 0 0 3px var(--neon-blue),
-      0 0 40px rgba(0, 245, 255, 0.8),
-      inset 0 0 30px rgba(0, 0, 0, 0.5);
-  }
-  100% { 
-    box-shadow: 
-      0 0 0 3px var(--neon-green),
-      0 0 60px rgba(57, 255, 20, 0.9),
-      inset 0 0 30px rgba(0, 0, 0, 0.3);
-  }
-}
-
-@keyframes pointerBounce {
-  0% { transform: translateX(-50%) translateY(0px); }
-  100% { transform: translateX(-50%) translateY(-5px); }
+  0% { box-shadow: 0 0 40px rgba(57, 255, 20, 0.6); }
+  100% { box-shadow: 0 0 60px rgba(57, 255, 20, 0.9); }
 }
 
 .lock-overlay {
@@ -472,13 +511,26 @@
 }
 
 @media (max-width: 768px) {
-  
   .winner-title {
     font-size: 2rem;
   }
   
-  .spin-wheel {
-    width: 300px;
-    height: 300px;
+  .treasure-chest {
+    width: 250px;
+    height: 200px;
+  }
+  
+  .chest-base {
+    width: 250px;
+    height: 120px;
+  }
+  
+  .chest-lid {
+    width: 250px;
+    height: 100px;
+  }
+  
+  .winners-grid {
+    grid-template-columns: 1fr;
   }
 }
