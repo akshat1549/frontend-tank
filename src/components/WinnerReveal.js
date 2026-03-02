@@ -143,11 +143,21 @@ const WinnerReveal = () => {
               )}
               
               <div className={`loot-chest ${isOpening ? 'opening' : ''}`} onClick={isAdminMode && !isOpening ? openChest : null}>
-                <div className="chest-front">
-                  <div className="chest-glow-ring"></div>
-                  <div className="chest-center">🎁</div>
-                  {!isOpening && isAdminMode && <div className="click-hint">CLICK TO OPEN</div>}
+                <div className="chest-3d">
+                  <div className="chest-body">
+                    <div className="chest-front-face"></div>
+                    <div className="chest-back-face"></div>
+                    <div className="chest-left-face"></div>
+                    <div className="chest-right-face"></div>
+                    <div className="chest-bottom-face"></div>
+                  </div>
+                  <div className="chest-lid-3d">
+                    <div className="lid-top"></div>
+                    <div className="lid-front"></div>
+                  </div>
+                  <div className="chest-lock-icon">🔒</div>
                 </div>
+                {!isOpening && isAdminMode && <div className="click-hint">CLICK TO OPEN</div>}
               </div>
               
               {currentWinner && (
