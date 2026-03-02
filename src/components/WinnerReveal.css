@@ -182,194 +182,101 @@
   50% { transform: translateY(-10px); }
 }
 
-.loot-chest {
-  width: 400px;
-  height: 350px;
+.treasure-chest {
+  width: 300px;
+  height: 250px;
   position: relative;
-  cursor: pointer;
-  perspective: 1200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  transform-style: preserve-3d;
 }
 
-.loot-chest:hover .chest-3d {
-  transform: rotateY(5deg) rotateX(-5deg) scale(1.05);
-}
-
-.loot-chest.opening .chest-3d {
+.treasure-chest.shaking {
   animation: chestShake 0.5s ease-in-out infinite;
 }
 
-.loot-chest.opening .chest-lid-3d {
+.chest-base {
+  width: 300px;
+  height: 150px;
+  background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #8B4513 100%);
+  border: 5px solid #654321;
+  border-radius: 15px;
+  position: absolute;
+  bottom: 0;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.8),
+    inset 0 -10px 20px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.chest-base::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.chest-lid {
+  width: 300px;
+  height: 120px;
+  background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #8B4513 100%);
+  border: 5px solid #654321;
+  border-radius: 15px 15px 5px 5px;
+  position: absolute;
+  top: 0;
+  transform-origin: bottom;
+  transition: transform 1s ease-out;
+  box-shadow: 
+    0 5px 20px rgba(0, 0, 0, 0.6),
+    inset 0 -5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.treasure-chest.open .chest-lid {
   transform: rotateX(-120deg);
 }
 
-.chest-3d {
-  width: 300px;
-  height: 280px;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.3s ease;
-}
-
-.chest-body {
-  width: 300px;
-  height: 180px;
+.chest-lock {
   position: absolute;
-  bottom: 0;
-  transform-style: preserve-3d;
-}
-
-.chest-front-face,
-.chest-back-face,
-.chest-left-face,
-.chest-right-face,
-.chest-bottom-face {
-  position: absolute;
-  background: linear-gradient(135deg, 
-    #FFD700 0%, 
-    #FFA500 25%, 
-    #FF8C00 50%, 
-    #FFA500 75%, 
-    #FFD700 100%);
-  border: 4px solid #00f5ff;
-  box-shadow: 
-    inset 0 0 30px rgba(0, 0, 0, 0.3),
-    0 0 30px rgba(0, 245, 255, 0.6),
-    0 0 50px rgba(191, 0, 255, 0.4);
-}
-
-.chest-front-face {
-  width: 300px;
-  height: 180px;
-  transform: translateZ(100px);
-}
-
-.chest-front-face::before {
-  content: '';
-  position: absolute;
-  width: 80%;
-  height: 8px;
-  background: linear-gradient(90deg, transparent, #00f5ff, #bf00ff, #00f5ff, transparent);
-  top: 50%;
-  left: 10%;
-  border-radius: 4px;
-  box-shadow: 0 0 20px rgba(0, 245, 255, 0.8);
-}
-
-.chest-back-face {
-  width: 300px;
-  height: 180px;
-  transform: translateZ(-100px) rotateY(180deg);
-}
-
-.chest-left-face {
-  width: 200px;
-  height: 180px;
-  transform: rotateY(-90deg) translateZ(50px);
-}
-
-.chest-right-face {
-  width: 200px;
-  height: 180px;
-  transform: rotateY(90deg) translateZ(250px);
-}
-
-.chest-bottom-face {
-  width: 300px;
-  height: 200px;
-  transform: rotateX(-90deg) translateZ(0px);
-}
-
-.chest-lid-3d {
-  width: 300px;
-  height: 120px;
-  position: absolute;
-  top: 0;
-  transform-style: preserve-3d;
-  transform-origin: bottom center;
-  transition: transform 1s ease-out;
-  z-index: 10;
-}
-
-.lid-top {
-  width: 300px;
-  height: 200px;
-  position: absolute;
-  background: linear-gradient(135deg, 
-    #FFD700 0%, 
-    #FFA500 25%, 
-    #FF8C00 50%, 
-    #FFA500 75%, 
-    #FFD700 100%);
-  border: 4px solid #bf00ff;
-  border-radius: 50% 50% 0 0 / 30% 30% 0 0;
-  transform: rotateX(90deg) translateZ(120px);
-  box-shadow: 
-    inset 0 0 30px rgba(0, 0, 0, 0.3),
-    0 0 30px rgba(191, 0, 255, 0.6),
-    0 0 50px rgba(255, 20, 147, 0.4);
-}
-
-.lid-top::before {
-  content: '';
-  position: absolute;
-  width: 70%;
-  height: 8px;
-  background: linear-gradient(90deg, transparent, #bf00ff, #ff1493, #bf00ff, transparent);
-  top: 50%;
-  left: 15%;
-  border-radius: 4px;
-  box-shadow: 0 0 20px rgba(191, 0, 255, 0.9);
-}
-
-.lid-front {
-  width: 300px;
-  height: 120px;
-  position: absolute;
-  background: linear-gradient(135deg, 
-    #FFD700 0%, 
-    #FFA500 25%, 
-    #FF8C00 50%, 
-    #FFA500 75%, 
-    #FFD700 100%);
-  border: 4px solid #bf00ff;
-  border-radius: 50% 50% 0 0 / 60% 60% 0 0;
-  transform: translateZ(100px);
-  box-shadow: 
-    inset 0 0 30px rgba(0, 0, 0, 0.3),
-    0 0 30px rgba(191, 0, 255, 0.6);
-}
-
-.chest-lock-icon {
-  position: absolute;
-  bottom: 70px;
+  bottom: -15px;
   left: 50%;
-  transform: translateX(-50%) translateZ(105px);
-  font-size: 3rem;
-  z-index: 20;
-  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1))
-          drop-shadow(0 0 40px rgba(255, 102, 0, 0.9));
-  animation: lockFloat 2s ease-in-out infinite;
-}
-
-.loot-chest.opening .chest-lock-icon {
-  opacity: 0;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
   transition: opacity 0.5s;
 }
 
-.click-hint {
+.treasure-chest.open .chest-lock {
+  opacity: 0;
+}
+
+.chest-glow {
   position: absolute;
-  bottom: -40px;
-  font-family: 'Orbitron', monospace;
-  font-size: 1rem;
-  color: #00f5ff;
-  text-shadow: 0 0 15px #00f5ff;
-  animation: hintBlink 1.5s ease-in-out infinite;
-  letter-spacing: 3px;
-  font-weight: 700;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 1s;
+  pointer-events: none;
+}
+
+.treasure-chest.open .chest-glow {
+  opacity: 1;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes chestShake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-5px) rotate(-2deg); }
+  75% { transform: translateX(5px) rotate(2deg); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
 }
 
 .winner-popup {
@@ -464,6 +371,34 @@
 }
 
 
+
+.open-btn {
+  padding: 20px 40px;
+  background: var(--gaming-gradient);
+  border: 3px solid var(--neon-green);
+  border-radius: var(--border-radius);
+  color: white;
+  font-family: 'Orbitron', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.open-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(57, 255, 20, 0.6);
+}
+
+.open-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 
 .winners-announcement {
   text-align: center;
@@ -673,34 +608,19 @@
     font-size: 2rem;
   }
   
-  .loot-chest {
-    width: 320px;
-    height: 280px;
+  .treasure-chest {
+    width: 250px;
+    height: 200px;
   }
   
-  .chest-3d {
+  .chest-base {
     width: 250px;
-    height: 230px;
+    height: 120px;
   }
   
-  .chest-body {
+  .chest-lid {
     width: 250px;
-    height: 150px;
-  }
-  
-  .chest-front-face,
-  .chest-back-face {
-    width: 250px;
-    height: 150px;
-  }
-  
-  .chest-lid-3d {
-    width: 250px;
-  }
-  
-  .lid-top,
-  .lid-front {
-    width: 250px;
+    height: 100px;
   }
   
   .winners-grid {

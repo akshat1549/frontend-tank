@@ -6,7 +6,7 @@ const WinnerReveal = () => {
   const [participants, setParticipants] = useState([]);
   const [isOpening, setIsOpening] = useState(false);
   const [winners, setWinners] = useState([]);
-  const [currentWinner, setCurrentWinner] = useState(null);
+  const [isChestOpen, setIsChestOpen] = useState(false);
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [password, setPassword] = useState('');
   const [showPasswordModal, setShowPasswordModal] = useState(false);
@@ -56,7 +56,9 @@ const WinnerReveal = () => {
 
     setIsOpening(true);
     setWinners([]);
-    setCurrentWinner(null);
+    setIsChestOpen(false);
+
+    setTimeout(() => setIsChestOpen(true), 1000);
 
     const selectedWinners = [];
     const participantsCopy = [...participants];
@@ -65,21 +67,15 @@ const WinnerReveal = () => {
       const randomIndex = Math.floor(Math.random() * participantsCopy.length);
       selectedWinners.push(participantsCopy[randomIndex]);
       participantsCopy.splice(randomIndex, 1);
-    }
-
-    selectedWinners.forEach((winner, index) => {
+      
       setTimeout(() => {
-        setCurrentWinner(winner);
-        setTimeout(() => {
-          setWinners(prev => [...prev, winner]);
-          setCurrentWinner(null);
-        }, 2000);
-      }, index * 3000);
-    });
+        setWinners(prev => [...prev, selectedWinners[i]]);
+      }, 2000 + (i * 1000));
+    }
 
     setTimeout(() => {
       setIsOpening(false);
-    }, 12000);
+    }, 6000);
   };
 
   return (
@@ -142,40 +138,23 @@ const WinnerReveal = () => {
                 </div>
               )}
               
-              <div className={`loot-chest ${isOpening ? 'opening' : ''}`} onClick={isAdminMode && !isOpening ? openChest : null}>
-                <div className="chest-3d">
-                  <div className="chest-body">
-                    <div className="chest-front-face"></div>
-                    <div className="chest-back-face"></div>
-                    <div className="chest-left-face"></div>
-                    <div className="chest-right-face"></div>
-                    <div className="chest-bottom-face"></div>
-                  </div>
-                  <div className="chest-lid-3d">
-                    <div className="lid-top"></div>
-                    <div className="lid-front"></div>
-                  </div>
-                  <div className="chest-lock-icon">🔒</div>
+              <div className={`treasure-chest ${isChestOpen ? 'open' : ''} ${isOpening ? 'shaking' : ''}`}>
+                <div className="chest-lid">
+                  <div className="chest-lock">🔒</div>
                 </div>
-                {!isOpening && isAdminMode && <div className="click-hint">CLICK TO OPEN</div>}
+                <div className="chest-base"></div>
+                <div className="chest-glow"></div>
               </div>
-              
-              {currentWinner && (
-                <div className="winner-popup">
-                  <div className="popup-content">
-                    <h2>🎉 WINNER 🎉</h2>
-                    <div className="winner-name">{currentWinner.game_username}</div>
-                    <p>Game ID: {currentWinner.game_id}</p>
-                    <p>Server: {currentWinner.server}</p>
-                  </div>
-                </div>
-              )}
             </div>
             
             {isAdminMode && (
-              <p className="chest-instruction">
-                {isOpening ? '🎁 Opening chest...' : '👆 Click the chest to reveal winners'}
-              </p>
+              <button 
+                className="open-btn" 
+                onClick={openChest}
+                disabled={isOpening || participants.length < 4}
+              >
+                {isOpening ? '🎁 OPENING...' : '🎁 OPEN CHEST'}
+              </button>
             )}
             
             {!isAdminMode && (
