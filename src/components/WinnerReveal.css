@@ -184,7 +184,7 @@
 
 .treasure-chest {
   width: 350px;
-  height: 280px;
+  height: 300px;
   position: relative;
   transform-style: preserve-3d;
   filter: drop-shadow(0 0 30px rgba(0, 245, 255, 0.5));
@@ -196,7 +196,7 @@
 
 .chest-base {
   width: 350px;
-  height: 170px;
+  height: 180px;
   background: linear-gradient(135deg, 
     #1a1a2e 0%, 
     #16213e 25%, 
@@ -204,7 +204,7 @@
     #16213e 75%, 
     #1a1a2e 100%);
   border: 6px solid #00f5ff;
-  border-radius: 20px;
+  border-radius: 15px 15px 25px 25px;
   position: absolute;
   bottom: 0;
   box-shadow: 
@@ -235,17 +235,23 @@
 .chest-base::after {
   content: '';
   position: absolute;
-  width: 80%;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, #00f5ff, transparent);
-  bottom: 30px;
-  left: 10%;
-  box-shadow: 0 0 10px #00f5ff;
+  width: 90%;
+  height: 8px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(0, 245, 255, 0.6), 
+    rgba(191, 0, 255, 0.6),
+    rgba(0, 245, 255, 0.6),
+    transparent);
+  bottom: 40px;
+  left: 5%;
+  border-radius: 4px;
+  box-shadow: 0 0 15px rgba(0, 245, 255, 0.8);
 }
 
 .chest-lid {
   width: 350px;
-  height: 140px;
+  height: 150px;
   background: linear-gradient(135deg, 
     #1a1a2e 0%, 
     #16213e 25%, 
@@ -253,10 +259,10 @@
     #16213e 75%, 
     #1a1a2e 100%);
   border: 6px solid #bf00ff;
-  border-radius: 20px 20px 8px 8px;
+  border-radius: 50% 50% 15px 15px / 40% 40% 15px 15px;
   position: absolute;
   top: 0;
-  transform-origin: bottom;
+  transform-origin: bottom center;
   transition: transform 1s ease-out;
   box-shadow: 
     0 8px 30px rgba(0, 0, 0, 0.8),
@@ -269,20 +275,29 @@
 .chest-lid::before {
   content: '';
   position: absolute;
-  width: 60%;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #bf00ff, transparent);
-  top: 50%;
-  left: 20%;
-  box-shadow: 0 0 10px #bf00ff;
+  width: 70%;
+  height: 6px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(191, 0, 255, 0.8), 
+    rgba(255, 20, 147, 0.8),
+    rgba(191, 0, 255, 0.8),
+    transparent);
+  top: 60%;
+  left: 15%;
+  border-radius: 3px;
+  box-shadow: 0 0 12px rgba(191, 0, 255, 0.9);
 }
 
 .chest-lid::after {
   content: '';
   position: absolute;
-  width: 40px;
-  height: 40px;
-  background: radial-gradient(circle, rgba(255, 20, 147, 0.6), transparent);
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, 
+    rgba(255, 20, 147, 0.4) 0%,
+    rgba(191, 0, 255, 0.3) 50%,
+    transparent 70%);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -291,34 +306,38 @@
 }
 
 .treasure-chest.open .chest-lid {
-  transform: rotateX(-130deg);
+  transform: rotateX(-140deg) translateY(-20px);
 }
 
 .chest-lock {
   position: absolute;
-  bottom: -20px;
+  bottom: -25px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 2.5rem;
-  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 1)) 
-          drop-shadow(0 0 25px rgba(255, 102, 0, 0.8));
-  transition: opacity 0.5s;
+  font-size: 3rem;
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1)) 
+          drop-shadow(0 0 35px rgba(255, 102, 0, 0.9))
+          drop-shadow(0 0 50px rgba(255, 20, 147, 0.6));
+  transition: all 0.5s;
   animation: lockGlow 2s ease-in-out infinite;
+  z-index: 10;
 }
 
 .treasure-chest.open .chest-lock {
   opacity: 0;
+  transform: translateX(-50%) scale(0.5);
 }
 
 .chest-glow {
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
   background: radial-gradient(circle, 
-    rgba(0, 245, 255, 0.8) 0%, 
-    rgba(191, 0, 255, 0.6) 30%,
-    rgba(255, 20, 147, 0.4) 60%,
-    transparent 80%);
+    rgba(0, 245, 255, 0.9) 0%, 
+    rgba(191, 0, 255, 0.7) 25%,
+    rgba(255, 20, 147, 0.5) 50%,
+    rgba(255, 102, 0, 0.3) 70%,
+    transparent 90%);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -335,18 +354,18 @@
 
 @keyframes chestShake {
   0%, 100% { transform: translateX(0) rotate(0deg); }
-  25% { transform: translateX(-8px) rotate(-3deg); }
-  75% { transform: translateX(8px) rotate(3deg); }
+  25% { transform: translateX(-10px) rotate(-4deg); }
+  75% { transform: translateX(10px) rotate(4deg); }
 }
 
 @keyframes glowPulse {
   0%, 100% { 
-    opacity: 0.8; 
-    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.9; 
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
   }
   50% { 
     opacity: 1; 
-    transform: translate(-50%, -50%) scale(1.3);
+    transform: translate(-50%, -50%) scale(1.4) rotate(180deg);
   }
 }
 
@@ -357,18 +376,20 @@
 
 @keyframes lockGlow {
   0%, 100% { 
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 1)) 
-            drop-shadow(0 0 25px rgba(255, 102, 0, 0.8));
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1)) 
+            drop-shadow(0 0 35px rgba(255, 102, 0, 0.9))
+            drop-shadow(0 0 50px rgba(255, 20, 147, 0.6));
   }
   50% { 
-    filter: drop-shadow(0 0 25px rgba(255, 215, 0, 1)) 
-            drop-shadow(0 0 40px rgba(255, 102, 0, 1));
+    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 1)) 
+            drop-shadow(0 0 50px rgba(255, 102, 0, 1))
+            drop-shadow(0 0 70px rgba(255, 20, 147, 0.9));
   }
 }
 
 @keyframes lidPulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
+  0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.2); }
 }
 
 .open-btn {
@@ -609,17 +630,17 @@
   
   .treasure-chest {
     width: 280px;
-    height: 220px;
+    height: 240px;
   }
   
   .chest-base {
     width: 280px;
-    height: 130px;
+    height: 140px;
   }
   
   .chest-lid {
     width: 280px;
-    height: 110px;
+    height: 120px;
   }
   
   .winners-grid {
