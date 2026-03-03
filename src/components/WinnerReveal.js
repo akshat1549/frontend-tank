@@ -154,7 +154,7 @@ const WinnerReveal = () => {
                 )}
                 
                 <img 
-                  src="/Gemini_Generated_Image_f8dqt1f8dqt1f8dq.png" 
+                  src="/Screenshot 2026-03-03 203624.png" 
                   alt="Treasure Chest" 
                   className={`chest-image ${isRevealing ? 'opening' : ''}`}
                 />
