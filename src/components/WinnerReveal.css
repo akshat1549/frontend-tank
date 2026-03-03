@@ -182,116 +182,58 @@
   50% { transform: translateY(-10px); }
 }
 
-.goblet-of-fire {
-  width: 200px;
-  height: 400px;
+.chest-image-container {
   position: relative;
+  width: 500px;
+  height: 500px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.goblet-cup {
-  position: relative;
+.chest-image {
   width: 100%;
-  height: 100%;
+  height: auto;
+  filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.9));
+  transition: all 0.5s ease;
 }
 
-.goblet-rim {
-  width: 180px;
-  height: 30px;
-  background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #2c2c2c 100%);
-  border: 3px solid #1a1a1a;
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+.chest-image.opening {
+  animation: chestBounce 0.6s ease-in-out infinite;
+  filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.9))
+          drop-shadow(0 0 40px rgba(255, 215, 0, 0.8))
+          drop-shadow(0 0 80px rgba(255, 102, 0, 0.6));
+}
+
+@keyframes chestBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.05); }
+}
+
+.chest-glow-effect {
   position: absolute;
-  top: 0;
-  left: 10px;
-  box-shadow: 
-    0 5px 15px rgba(0, 0, 0, 0.8),
-    inset 0 -5px 10px rgba(0, 0, 0, 0.5);
-}
-
-.goblet-body {
-  width: 160px;
-  height: 200px;
-  background: linear-gradient(180deg, #3a3a3a 0%, #2c2c2c 50%, #1a1a1a 100%);
-  border: 3px solid #1a1a1a;
-  position: absolute;
-  top: 25px;
-  left: 20px;
-  clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.9),
-    inset 0 0 30px rgba(0, 0, 0, 0.7);
-}
-
-.goblet-stem {
-  width: 40px;
-  height: 100px;
-  background: linear-gradient(180deg, #2c2c2c 0%, #1a1a1a 100%);
-  border: 2px solid #1a1a1a;
-  position: absolute;
-  top: 220px;
-  left: 80px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
-}
-
-.goblet-base {
-  width: 120px;
-  height: 40px;
-  background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #2c2c2c 100%);
-  border: 3px solid #1a1a1a;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, 
+    rgba(255, 215, 0, 0.6) 0%,
+    rgba(255, 102, 0, 0.4) 30%,
+    rgba(255, 20, 147, 0.2) 60%,
+    transparent 80%);
   border-radius: 50%;
-  position: absolute;
-  top: 310px;
-  left: 40px;
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.9),
-    inset 0 -5px 15px rgba(0, 0, 0, 0.6);
+  animation: glowPulse 1.5s ease-in-out infinite;
+  pointer-events: none;
 }
 
-.blue-flames {
-  position: absolute;
-  top: -50px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 150px;
-  height: 150px;
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-
-.goblet-of-fire.active .blue-flames {
-  opacity: 1;
-}
-
-.flame {
-  position: absolute;
-  width: 50px;
-  height: 80px;
-  background: radial-gradient(ellipse at bottom, #00d4ff 0%, #0080ff 50%, transparent 70%);
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-  animation: flameFlicker 0.3s ease-in-out infinite alternate;
-  filter: blur(2px);
-}
-
-.flame:nth-child(1) {
-  left: 20px;
-  animation-delay: 0s;
-}
-
-.flame:nth-child(2) {
-  left: 50px;
-  height: 100px;
-  animation-delay: 0.1s;
-}
-
-.flame:nth-child(3) {
-  left: 80px;
-  animation-delay: 0.2s;
-}
-
-@keyframes flameFlicker {
-  0% { transform: scaleY(1) scaleX(1); }
-  100% { transform: scaleY(1.1) scaleX(0.95); }
+@keyframes glowPulse {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% { 
+    transform: scale(1.3);
+    opacity: 1;
+  }
 }
 
 .parchment-reveal {
@@ -697,20 +639,9 @@
     font-size: 2rem;
   }
   
-  .goblet-of-fire {
-    width: 150px;
-    height: 300px;
-  }
-  
-  .goblet-rim {
-    width: 130px;
-    left: 10px;
-  }
-  
-  .goblet-body {
-    width: 120px;
-    height: 150px;
-    left: 15px;
+  .chest-image-container {
+    width: 350px;
+    height: 350px;
   }
   
   .parchment {
