@@ -142,31 +142,18 @@ const WinnerReveal = () => {
                 </div>
               )}
               
-              <div className="chest-image-container">
-                {!isAdminMode && (
-                  <div className="chest-lock-3d" onClick={handleLockClick}>
-                    <div className="lock-body">
-                      <div className="lock-shackle"></div>
-                      <div className="lock-keyhole"></div>
-                    </div>
-                    <p className="lock-text">Admin Only</p>
-                  </div>
-                )}
-                
-                <img 
-                  src="/Gemini_Generated_Image_nfw2xbnfw2xbnfw2.png" 
-                  alt="Treasure Chest" 
-                  className={`chest-image ${isRevealing ? 'opening' : ''}`}
-                />
-                
-                {isRevealing && (
-                  <div className="chest-particles">
-                    <div className="particle"></div>
-                    <div className="particle"></div>
-                    <div className="particle"></div>
-                    <div className="particle"></div>
-                  </div>
-                )}
+              <div className={`goblet-of-fire ${isRevealing ? 'active' : ''}`}>
+                <div className="goblet-cup">
+                  <div className="goblet-rim"></div>
+                  <div className="goblet-body"></div>
+                  <div className="goblet-stem"></div>
+                  <div className="goblet-base"></div>
+                </div>
+                <div className="blue-flames">
+                  <div className="flame"></div>
+                  <div className="flame"></div>
+                  <div className="flame"></div>
+                </div>
               </div>
               
               {currentParchment && (
