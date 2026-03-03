@@ -182,101 +182,216 @@
   50% { transform: translateY(-10px); }
 }
 
-.treasure-chest {
-  width: 300px;
-  height: 250px;
+.goblet-of-fire {
+  width: 200px;
+  height: 400px;
   position: relative;
-  transform-style: preserve-3d;
+  margin: 0 auto;
 }
 
-.treasure-chest.shaking {
-  animation: chestShake 0.5s ease-in-out infinite;
-}
-
-.chest-base {
-  width: 300px;
-  height: 150px;
-  background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #8B4513 100%);
-  border: 5px solid #654321;
-  border-radius: 15px;
-  position: absolute;
-  bottom: 0;
-  box-shadow: 
-    0 10px 40px rgba(0, 0, 0, 0.8),
-    inset 0 -10px 20px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(255, 215, 0, 0.3);
-}
-
-.chest-base::before {
-  content: '';
-  position: absolute;
+.goblet-cup {
+  position: relative;
   width: 100%;
-  height: 20px;
-  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
-  top: 50%;
-  transform: translateY(-50%);
+  height: 100%;
 }
 
-.chest-lid {
-  width: 300px;
-  height: 120px;
-  background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #8B4513 100%);
-  border: 5px solid #654321;
-  border-radius: 15px 15px 5px 5px;
+.goblet-rim {
+  width: 180px;
+  height: 30px;
+  background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #2c2c2c 100%);
+  border: 3px solid #1a1a1a;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
   position: absolute;
   top: 0;
-  transform-origin: bottom;
-  transition: transform 1s ease-out;
+  left: 10px;
   box-shadow: 
-    0 5px 20px rgba(0, 0, 0, 0.6),
-    inset 0 -5px 15px rgba(0, 0, 0, 0.4);
+    0 5px 15px rgba(0, 0, 0, 0.8),
+    inset 0 -5px 10px rgba(0, 0, 0, 0.5);
 }
 
-.treasure-chest.open .chest-lid {
-  transform: rotateX(-120deg);
-}
-
-.chest-lock {
+.goblet-body {
+  width: 160px;
+  height: 200px;
+  background: linear-gradient(180deg, #3a3a3a 0%, #2c2c2c 50%, #1a1a1a 100%);
+  border: 3px solid #1a1a1a;
   position: absolute;
-  bottom: -15px;
+  top: 25px;
+  left: 20px;
+  clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.9),
+    inset 0 0 30px rgba(0, 0, 0, 0.7);
+}
+
+.goblet-stem {
+  width: 40px;
+  height: 100px;
+  background: linear-gradient(180deg, #2c2c2c 0%, #1a1a1a 100%);
+  border: 2px solid #1a1a1a;
+  position: absolute;
+  top: 220px;
+  left: 80px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+}
+
+.goblet-base {
+  width: 120px;
+  height: 40px;
+  background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #2c2c2c 100%);
+  border: 3px solid #1a1a1a;
+  border-radius: 50%;
+  position: absolute;
+  top: 310px;
+  left: 40px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.9),
+    inset 0 -5px 15px rgba(0, 0, 0, 0.6);
+}
+
+.blue-flames {
+  position: absolute;
+  top: -50px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 2rem;
-  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+  width: 150px;
+  height: 150px;
+  opacity: 0;
   transition: opacity 0.5s;
 }
 
-.treasure-chest.open .chest-lock {
-  opacity: 0;
+.goblet-of-fire.active .blue-flames {
+  opacity: 1;
 }
 
-.chest-glow {
+.flame {
   position: absolute;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, transparent 70%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 1s;
+  width: 50px;
+  height: 80px;
+  background: radial-gradient(ellipse at bottom, #00d4ff 0%, #0080ff 50%, transparent 70%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: flameFlicker 0.3s ease-in-out infinite alternate;
+  filter: blur(2px);
+}
+
+.flame:nth-child(1) {
+  left: 20px;
+  animation-delay: 0s;
+}
+
+.flame:nth-child(2) {
+  left: 50px;
+  height: 100px;
+  animation-delay: 0.1s;
+}
+
+.flame:nth-child(3) {
+  left: 80px;
+  animation-delay: 0.2s;
+}
+
+@keyframes flameFlicker {
+  0% { transform: scaleY(1) scaleX(1); }
+  100% { transform: scaleY(1.1) scaleX(0.95); }
+}
+
+.parchment-reveal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
   pointer-events: none;
 }
 
-.treasure-chest.open .chest-glow {
-  opacity: 1;
-  animation: glowPulse 2s ease-in-out infinite;
+.parchment {
+  width: 400px;
+  height: 200px;
+  background: linear-gradient(135deg, #f4e4c1 0%, #e8d4a8 100%);
+  border: 3px solid #8b7355;
+  border-radius: 10px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.8),
+    inset 0 0 30px rgba(139, 115, 85, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: parchmentFly 3s ease-out;
+  position: relative;
 }
 
-@keyframes chestShake {
-  0%, 100% { transform: translateX(0) rotate(0deg); }
-  25% { transform: translateX(-5px) rotate(-2deg); }
-  75% { transform: translateX(5px) rotate(2deg); }
+.parchment::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 2px solid rgba(139, 115, 85, 0.3);
+  border-radius: 8px;
 }
 
-@keyframes glowPulse {
-  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+.parchment-text {
+  font-family: 'Orbitron', monospace;
+  font-size: 2.5rem;
+  color: #2c1810;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: textBurn 3s ease-out;
+}
+
+@keyframes parchmentFly {
+  0% {
+    transform: translateY(400px) scale(0.5) rotate(0deg);
+    opacity: 0;
+  }
+  30% {
+    transform: translateY(-50px) scale(1) rotate(5deg);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(-50px) scale(1) rotate(-5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) scale(0.8) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+@keyframes textBurn {
+  0% { opacity: 0; transform: scale(0.8); }
+  30% { opacity: 1; transform: scale(1); }
+  70% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.2); }
+}
+
+.reveal-btn {
+  padding: 20px 40px;
+  background: linear-gradient(135deg, #0080ff 0%, #00d4ff 100%);
+  border: 3px solid #00d4ff;
+  border-radius: var(--border-radius);
+  color: white;
+  font-family: 'Orbitron', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.reveal-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.8);
+}
+
+.reveal-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .winner-popup {
@@ -372,33 +487,7 @@
 
 
 
-.open-btn {
-  padding: 20px 40px;
-  background: var(--gaming-gradient);
-  border: 3px solid var(--neon-green);
-  border-radius: var(--border-radius);
-  color: white;
-  font-family: 'Orbitron', monospace;
-  font-size: 1.2rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
-  margin-top: 40px;
-  margin-bottom: 30px;
-}
 
-.open-btn:hover:not(:disabled) {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(57, 255, 20, 0.6);
-}
-
-.open-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
 
 .winners-announcement {
   text-align: center;
@@ -608,19 +697,29 @@
     font-size: 2rem;
   }
   
-  .treasure-chest {
-    width: 250px;
-    height: 200px;
+  .goblet-of-fire {
+    width: 150px;
+    height: 300px;
   }
   
-  .chest-base {
-    width: 250px;
-    height: 120px;
+  .goblet-rim {
+    width: 130px;
+    left: 10px;
   }
   
-  .chest-lid {
-    width: 250px;
-    height: 100px;
+  .goblet-body {
+    width: 120px;
+    height: 150px;
+    left: 15px;
+  }
+  
+  .parchment {
+    width: 300px;
+    height: 150px;
+  }
+  
+  .parchment-text {
+    font-size: 1.8rem;
   }
   
   .winners-grid {

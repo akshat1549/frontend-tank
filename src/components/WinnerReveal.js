@@ -4,9 +4,9 @@ import './WinnerReveal.css';
 
 const WinnerReveal = () => {
   const [participants, setParticipants] = useState([]);
-  const [isOpening, setIsOpening] = useState(false);
+  const [isRevealing, setIsRevealing] = useState(false);
   const [winners, setWinners] = useState([]);
-  const [isChestOpen, setIsChestOpen] = useState(false);
+  const [currentParchment, setCurrentParchment] = useState(null);
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [password, setPassword] = useState('');
   const [showPasswordModal, setShowPasswordModal] = useState(false);
@@ -43,9 +43,9 @@ const WinnerReveal = () => {
     }
   };
 
-  const openChest = () => {
+  const revealWinners = () => {
     if (!isAdminMode) {
-      alert('Only admin can open the chest!');
+      alert('Only admin can reveal winners!');
       return;
     }
     
@@ -54,11 +54,9 @@ const WinnerReveal = () => {
       return;
     }
 
-    setIsOpening(true);
+    setIsRevealing(true);
     setWinners([]);
-    setIsChestOpen(false);
-
-    setTimeout(() => setIsChestOpen(true), 1000);
+    setCurrentParchment(null);
 
     const selectedWinners = [];
     const participantsCopy = [...participants];
@@ -67,15 +65,21 @@ const WinnerReveal = () => {
       const randomIndex = Math.floor(Math.random() * participantsCopy.length);
       selectedWinners.push(participantsCopy[randomIndex]);
       participantsCopy.splice(randomIndex, 1);
-      
-      setTimeout(() => {
-        setWinners(prev => [...prev, selectedWinners[i]]);
-      }, 2000 + (i * 1000));
     }
 
+    selectedWinners.forEach((winner, index) => {
+      setTimeout(() => {
+        setCurrentParchment(winner);
+        setTimeout(() => {
+          setWinners(prev => [...prev, winner]);
+          setCurrentParchment(null);
+        }, 3000);
+      }, index * 4000);
+    });
+
     setTimeout(() => {
-      setIsOpening(false);
-    }, 6000);
+      setIsRevealing(false);
+    }, 16000);
   };
 
   return (
@@ -138,28 +142,42 @@ const WinnerReveal = () => {
                 </div>
               )}
               
-              <div className={`treasure-chest ${isChestOpen ? 'open' : ''} ${isOpening ? 'shaking' : ''}`}>
-                <div className="chest-lid">
-                  <div className="chest-lock">🔒</div>
+              <div className={`goblet-of-fire ${isRevealing ? 'active' : ''}`}>
+                <div className="goblet-cup">
+                  <div className="goblet-rim"></div>
+                  <div className="goblet-body"></div>
+                  <div className="goblet-stem"></div>
+                  <div className="goblet-base"></div>
                 </div>
-                <div className="chest-base"></div>
-                <div className="chest-glow"></div>
+                <div className="blue-flames">
+                  <div className="flame"></div>
+                  <div className="flame"></div>
+                  <div className="flame"></div>
+                </div>
               </div>
+              
+              {currentParchment && (
+                <div className="parchment-reveal">
+                  <div className="parchment">
+                    <div className="parchment-text">{currentParchment.game_username}</div>
+                  </div>
+                </div>
+              )}
             </div>
             
             {isAdminMode && (
               <button 
-                className="open-btn" 
-                onClick={openChest}
-                disabled={isOpening || participants.length < 4}
+                className="reveal-btn" 
+                onClick={revealWinners}
+                disabled={isRevealing || participants.length < 4}
               >
-                {isOpening ? '🎁 OPENING...' : '🎁 OPEN CHEST'}
+                {isRevealing ? '🔥 REVEALING...' : '🔥 REVEAL WINNERS'}
               </button>
             )}
             
             {!isAdminMode && (
               <p className="viewer-message">
-                👁️ Viewing Mode - Only admin can open the chest
+                👁️ Viewing Mode - Only admin can reveal winners
               </p>
             )}
             
