@@ -92,10 +92,10 @@
 }
 
 .winner-content {
-  display: grid;
-  grid-template-columns: 1fr 400px;
+  display: flex;
+  flex-direction: column;
   gap: 30px;
-  align-items: start;
+  align-items: center;
 }
 
 .chest-section {
@@ -105,6 +105,8 @@
   border-radius: 20px;
   padding: 40px;
   box-shadow: 0 0 30px rgba(0, 245, 255, 0.2);
+  width: 100%;
+  max-width: 800px;
 }
 
 .chest-container {
@@ -628,6 +630,8 @@
   box-shadow: 0 0 30px rgba(191, 0, 255, 0.2);
   max-height: 600px;
   overflow-y: auto;
+  width: 100%;
+  max-width: 800px;
 }
 
 .participants-section h2 {
@@ -680,10 +684,6 @@
 }
 
 @media (max-width: 1024px) {
-  .winner-content {
-    grid-template-columns: 1fr;
-  }
-  
   .chest-3d {
     width: 300px;
     height: 300px;
