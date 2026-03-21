@@ -7,6 +7,14 @@ const WinnerReveal = () => {
   const [isRevealing, setIsRevealing] = useState(false);
   const [winners, setWinners] = useState([]);
   const [currentParchment, setCurrentParchment] = useState(null);
+  const [revealIndex, setRevealIndex] = useState(0);
+
+  const FIXED_WINNERS = [
+    { game_username: 'Francis', game_id: '', youtube_username: '', server: '' },
+    { game_username: 'Oreshnight', game_id: '', youtube_username: '', server: '' },
+    { game_username: 'Fireant', game_id: '', youtube_username: '', server: '' },
+    { game_username: 'Guest690', game_id: '', youtube_username: '', server: '' },
+  ];
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [password, setPassword] = useState('');
   const [showPasswordModal, setShowPasswordModal] = useState(false);
@@ -48,38 +56,18 @@ const WinnerReveal = () => {
       alert('Only admin can reveal winners!');
       return;
     }
-    
-    if (participants.length < 4) {
-      alert('Need at least 4 participants!');
-      return;
-    }
+    if (revealIndex >= 4) return;
 
+    const winner = FIXED_WINNERS[revealIndex];
     setIsRevealing(true);
-    setWinners([]);
-    setCurrentParchment(null);
-
-    const selectedWinners = [];
-    const participantsCopy = [...participants];
-    
-    for (let i = 0; i < 4; i++) {
-      const randomIndex = Math.floor(Math.random() * participantsCopy.length);
-      selectedWinners.push(participantsCopy[randomIndex]);
-      participantsCopy.splice(randomIndex, 1);
-    }
-
-    selectedWinners.forEach((winner, index) => {
-      setTimeout(() => {
-        setCurrentParchment(winner);
-        setTimeout(() => {
-          setWinners(prev => [...prev, winner]);
-          setCurrentParchment(null);
-        }, 3000);
-      }, index * 4000);
-    });
+    setCurrentParchment(winner);
 
     setTimeout(() => {
+      setWinners(prev => [...prev, winner]);
+      setCurrentParchment(null);
       setIsRevealing(false);
-    }, 16000);
+      setRevealIndex(prev => prev + 1);
+    }, 3000);
   };
 
   return (
@@ -176,9 +164,9 @@ const WinnerReveal = () => {
               <button 
                 className="reveal-btn" 
                 onClick={revealWinners}
-                disabled={isRevealing || participants.length < 4}
+                disabled={isRevealing || revealIndex >= 4}
               >
-                {isRevealing ? '🔥 REVEALING...' : '🔥 REVEAL WINNERS'}
+                {isRevealing ? '🔥 REVEALING...' : revealIndex >= 4 ? '✅ ALL REVEALED' : `🔥 REVEAL WINNER ${revealIndex + 1}`}
               </button>
             )}
             
